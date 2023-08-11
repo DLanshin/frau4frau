@@ -24,7 +24,7 @@ const options = [
     {value: 'vanilla', label: 'Vanilla'}
 ]
 const Form = observer(() => {
-    const mapToken = process.env.REACT_APP_MAP_TOKEN;
+    const mapToken = process.env.REACT_APP_MAP;
     const {initBackButton, showTelegramAlert, user, showMainButton} = useTelegram();
     const [isLoading, setIsLoading] = useState(true);
     const {settings} = UserStore;

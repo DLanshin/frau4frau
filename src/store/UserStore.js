@@ -3,7 +3,7 @@ import {$api} from "../http";
 
 class UserStore {
     settings = {
-        "phone":'',
+        "phone": '',
         "address": {
             "country": '',
             "zip": '',
@@ -13,15 +13,19 @@ class UserStore {
             "flat": ''
         }
     }
+
     constructor() {
         makeAutoObservable(this)
     }
 
     async fetchSettings(user_id) {
-        await $api.get(`/settings/get/${user_id}`).then(({data})=>{
-            this.settings = data.data
+        await $api.get(`${process.env.REACT_APP_API_URL}/settings/get/${user_id}`).then(({data}) => {
+            if (data) {
+                this.settings = data?.data
+            }
         });
     }
 
 }
+
 export default new UserStore();
