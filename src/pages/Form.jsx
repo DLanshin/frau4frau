@@ -87,6 +87,13 @@ const Form = observer(() => {
         })
 
         setScreen("products");
+        showMainButton({
+            text: `Отправить заявку`,
+            is_visible: !!formData?.products.length,
+        }, () => {
+            setScreen("contacts")
+            showMainButton({is_visible: false})
+        })
     }
 
 
@@ -121,15 +128,8 @@ const Form = observer(() => {
     useEffect(() => {
         UserStore.fetchSettings(user_id).then(() => {
             setIsLoading(false)
-            showMainButton({
-                text: `Отправить заявку`,
-                is_visible: !!formData?.products.length,
-            }, () => {
-                setScreen("contacts")
-            })
         })
-
-    }, [formData.products]);
+    }, []);
     useEffect(() => {
         setFormData({
             ...formData,
