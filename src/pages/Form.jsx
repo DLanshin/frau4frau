@@ -93,6 +93,16 @@ const Form = observer(() => {
     const sendRequest = () => {
 
         OrderStore.createOrder(formData).then((res) => {
+            setIsLoading(true)
+            showTelegramAlert(
+                "Ваша заявка успешно создана",
+                () => {
+                    setScreen("products");
+                    setTimeout(() => {
+                        setIsLoading(false);
+                    }, 1000)
+                }
+            )
             setFormData({
                 name: "",
                 phone: "",
@@ -106,16 +116,7 @@ const Form = observer(() => {
                 products: []
             })
         })
-        showTelegramAlert(
-            "Ваша заявка успешно создана",
-            () => {
-                setIsLoading(true)
-                setScreen("products");
-                setTimeout(() => {
-                    setIsLoading(false);
-                }, 1000)
-            }
-        )
+
     }
     useEffect(() => {
         UserStore.fetchSettings(user_id).then(() => {
