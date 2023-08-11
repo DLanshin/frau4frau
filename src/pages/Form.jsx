@@ -192,6 +192,52 @@ const Form = observer(() => {
                 }
             </Screen>
             <Screen className={`screen ${screen === "add_product" ? "" : "display-none"}`}>
+                <div className={"form-block"}>
+                    <div className={"form-block__title"}>Фотографии товара</div>
+                    <div className="form">
+                        <div className="upload-images">
+                            <ImageUploading
+                                multiple
+                                value={product.images}
+                                onChange={onChange}
+                                maxNumber={maxNumber}
+                                dataURLKey="data_url"
+                            >
+                                {({
+                                      imageList,
+                                      onImageUpload,
+                                      onImageRemove,
+                                      isDragging,
+                                      dragProps,
+                                  }) => (
+                                    // write your building UI
+                                    <div className="upload-images__wrapper">
+                                        <button
+                                            className={"upload-images__add-button"}
+                                            style={isDragging ? {color: 'red'} : undefined}
+                                            onClick={onImageUpload}
+                                            {...dragProps}
+                                        >
+                                            <ReactSVG className={'svg-icon'} src={uploadIcon}/>
+                                            <span>Загрузить изображения</span>
+                                        </button>
+                                        <div className="upload-images__list">
+                                            {imageList.map((image, index) => (
+                                                <div key={index} className="upload-images__item">
+                                                    <img src={image['data_url']} alt="" width="100"/>
+                                                    <button className={"upload-images__item-delete"}
+                                                            onClick={() => onImageRemove(index)}>x
+                                                    </button>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
+                            </ImageUploading>
+                        </div>
+                    </div>
+                </div>
+
                 <form onSubmit={(e) => {
                     e.preventDefault()
                     addProduct(product)
@@ -252,51 +298,6 @@ const Form = observer(() => {
                                 />
                             </div>
 
-                        </div>
-                    </div>
-                    <div className={"form-block"}>
-                        <div className={"form-block__title"}>Фотографии товара</div>
-                        <div className="form">
-                            <div className="upload-images">
-                                <ImageUploading
-                                    multiple
-                                    value={product.images}
-                                    onChange={onChange}
-                                    maxNumber={maxNumber}
-                                    dataURLKey="data_url"
-                                >
-                                    {({
-                                          imageList,
-                                          onImageUpload,
-                                          onImageRemove,
-                                          isDragging,
-                                          dragProps,
-                                      }) => (
-                                        // write your building UI
-                                        <div className="upload-images__wrapper">
-                                            <button
-                                                className={"upload-images__add-button"}
-                                                style={isDragging ? {color: 'red'} : undefined}
-                                                onClick={onImageUpload}
-                                                {...dragProps}
-                                            >
-                                                <ReactSVG className={'svg-icon'} src={uploadIcon}/>
-                                                <span>Загрузить изображения</span>
-                                            </button>
-                                            <div className="upload-images__list">
-                                                {imageList.map((image, index) => (
-                                                    <div key={index} className="upload-images__item">
-                                                        <img src={image['data_url']} alt="" width="100"/>
-                                                        <button className={"upload-images__item-delete"}
-                                                                onClick={() => onImageRemove(index)}>x
-                                                        </button>
-                                                    </div>
-                                                ))}
-                                            </div>
-                                        </div>
-                                    )}
-                                </ImageUploading>
-                            </div>
                         </div>
                     </div>
                     <Button className={"button"} type={"submit"}>
