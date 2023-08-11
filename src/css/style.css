@@ -56,6 +56,20 @@ img {
   padding: 10px;
 }
 
+.link {
+  text-decoration: underline;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 154px;
+  display: inline-flex;
+  color: #51b1fc;
+  cursor: pointer;
+}
+.link:hover {
+  text-decoration: none;
+}
+
 :root {
   --hue: 223;
   --bg: hsl(var(--hue),10%,90%);
@@ -610,6 +624,92 @@ img {
   text-overflow: ellipsis;
   width: 154px;
   display: inline-flex;
+  color: #51b1fc;
+}
+
+.order {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px 15px;
+}
+
+.order-info {
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.04);
+  border-radius: 10px;
+}
+.order-info > *:first-child {
+  border-top-right-radius: 8px;
+  border-top-left-radius: 8px;
+}
+.order-info > *:last-child {
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  border-bottom: none;
+}
+.order-info__item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffffff;
+  padding: 10px 10px;
+  font-size: 14px;
+  color: #424242;
+  border-bottom: 1px solid #f9f9fa;
+}
+.order-info__item span:last-child {
+  color: #51b1fc;
+  font-weight: bold;
+}
+
+.orders {
+  color: #424242;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0;
+  gap: 20px;
+}
+.orders__list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.order-card {
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.04);
+  font-size: 14px;
+}
+.order-card > * {
+  padding: 10px;
+  border-bottom: 1px solid #f9f9fa;
+}
+.order-card > *:last-child {
+  border-bottom: none;
+}
+.order-card__header, .order-card__footer {
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.order-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.order-card__info {
+  font-size: 13px;
+}
+.order-card__info--hint {
+  color: #c3c3c3;
+}
+.order-card__price {
   color: #51b1fc;
 }
 

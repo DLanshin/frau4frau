@@ -1,5 +1,9 @@
 const tg = window.Telegram.WebApp;
 export function useTelegram(){
+
+    const openLink = (url) =>{
+        tg?.openLink(url)
+    }
     const onClose = () =>{
         tg?.close()
     }
@@ -43,7 +47,8 @@ export function useTelegram(){
         showTelegramAlert,
         expandApp,
         initBackButton,
-        closeApp
+        closeApp,
+        openLink
     }
 }
 
