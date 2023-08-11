@@ -17,6 +17,7 @@ import Button from "../components/Form/Button";
 import QuantityControl from "../components/Form/QuantityControl";
 import UserStore from "../store/UserStore";
 import Input from "../components/Form/Input";
+import {colors} from "../data/colors"
 
 const options = [
     {value: 'chocolate', label: 'Chocolate'},
@@ -283,7 +284,7 @@ const Form = observer(() => {
                                     console.log(product)
                                 }
                                 }
-                                options={options}/>
+                                options={colors}/>
 
                             <div className={"input-container input-container--row"}>
                                 <label>Кол-во</label>
