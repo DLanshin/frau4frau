@@ -74,6 +74,10 @@
   }
   &__info{
     font-size: 13px;
+    ul{
+      list-style: none;
+      padding:0;
+    }
     &--hint{
       color: $hint_color;
     }

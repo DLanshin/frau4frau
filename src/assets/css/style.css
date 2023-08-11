@@ -707,6 +707,10 @@ img {
 .order-card__info {
   font-size: 13px;
 }
+.order-card__info ul {
+  list-style: none;
+  padding: 0;
+}
 .order-card__info--hint {
   color: var(--tg-theme-hint-color);
 }
