@@ -121,7 +121,7 @@ const Form = observer(() => {
             setIsLoading(false)
             showMainButton({
                 text: `Отправить заявку`,
-                is_visible: !!product.length,
+                is_visible: !!formData?.products.length,
             }, () => {
                 setScreen("contacts")
             })
