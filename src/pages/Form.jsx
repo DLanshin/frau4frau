@@ -129,7 +129,7 @@ const Form = observer(() => {
             })
         })
 
-    }, []);
+    }, [formData.products]);
     useEffect(() => {
         setFormData({
             ...formData,
