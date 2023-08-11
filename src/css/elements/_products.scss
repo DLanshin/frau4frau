@@ -1,0 +1,36 @@
+.product{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  &__item{
+    padding: 5px;
+    border-radius: 8px;
+    background: $bg_color;
+    box-shadow: $shadow;
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 15px;
+  }
+  &__item-image{
+    img{
+      width: 100px;
+      height: 100px;
+      object-fit: contain;
+    }
+  }
+  &__item-content{}
+  &__item-property{
+    span, div{
+      display: inline-flex;
+    }
+    .link{
+      text-decoration: underline;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      width: 154px;
+      display: inline-flex;
+      color: $link_color;
+    }
+  }
+}

@@ -1,0 +1,31 @@
+.quality-control{
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 30px;
+  box-shadow:$shadow;
+  &__button{
+    color: $text-color;
+    border: none;
+    background-color: transparent;
+    height: 30px;
+    width: 30px!important;
+    padding: 0!important;
+    svg{
+      width: 12px;
+      height: 12px;
+      *{
+        fill: $text_color;
+        stroke: $text_color;
+      }
+    }
+  }
+  &__value{
+    text-align: center;
+    width: 25px;
+    font-size: 11px;
+    padding: 0 5px;
+
+  }
+}

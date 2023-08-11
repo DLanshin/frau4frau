@@ -1,0 +1,261 @@
+.request-form, .screen, .screen > form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-block {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  &__title {
+    font-size: 14px;
+    font-weight: bold;
+    color: $text_color;
+  }
+}
+
+.input-container {
+  display: flex;
+  width: 100%;
+  &--row{
+    padding: 0 8px;
+    align-items: center;
+    justify-content: space-between;
+    height: 35px;
+  }
+  mapbox-address-autofill{
+    width: 100%;
+  }
+}
+
+.input, .select, {
+  width: 100%;
+  position: relative;
+  font-size: 14px;
+  letter-spacing: .01rem;
+  padding: 0 8px;
+  background: $bg_color;
+  border: none;
+  line-height: 25px;
+  height: 35px;
+  outline: none;
+  color: $text_color;
+}
+
+.creatable-select {
+  color: $text_color;
+  background: $bg_color;
+
+  [class*=control] {
+    color: $text_color;
+    background: $bg_color;
+    border: none;
+  }
+
+  [class*=indicatorSeparator] {
+    background: $text_color;
+  }
+  [class*=Svg] {
+    fill: $text_color;
+  }
+  [class*=menu] {
+    margin: 0;
+    border-radius: 0 0 5px 5px;
+    border: none;
+    background: $secondary_bg_color;
+    & *:hover, & *:focus{
+      background: $secondary_bg_color;
+    }
+  }
+
+
+  [class*=singleValue] {
+    color: $text_color;
+  }
+
+  [data-value] {
+    color: $text_color !important;
+
+  }
+}
+
+.form {
+  border-radius: 8px;
+  background-color: $bg_color;
+  box-shadow: $shadow;
+
+  & > * {
+    border-bottom: 1px solid $secondary_bg_color;
+  }
+
+  & > *:first-child {
+    input, div {
+      color: $text_color;
+      border-top-right-radius: 8px;
+      border-top-left-radius: 8px;
+    }
+  }
+
+  & > *:last-child {
+    border-bottom: none;
+
+    input, div {
+      border-bottom-right-radius: 8px;
+      border-bottom-left-radius: 8px;
+    }
+  }
+
+  .form-control {
+    border: none !important;
+    width: 100% !important;
+    background-color: $bg_color !important;
+    color: $text_color!important;
+
+  }
+}
+
+.react-tel-input .flag-dropdown {
+  left: 1px;
+  top: 1px !important;
+  height: calc(100% - 2px);
+  background-color: transparent !important;
+  color: $text_color !important;
+  border: none !important;
+  border-radius: 6px 0 0 6px;
+
+  &.open {
+    background-color: $bg_color !important;
+  }
+}
+
+.react-tel-input .selected-flag {
+  border-radius: 6px 0 0 6px;
+}
+
+.react-tel-input .country-list {
+  background-color: $secondary_bg_color !important;
+  color: $text_color !important;
+}
+
+.react-tel-input .country-list .country.highlight,
+.react-tel-input .flag-dropdown.open .selected-flag,
+.react-tel-input .country-list .country:hover {
+  background-color: $bg_color !important;
+  color: $text_color !important;
+}
+
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  box-shadow: $shadow;
+  border-radius: 10px;
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__value {
+    color: $button_color;
+  }
+
+  & > *:first-child > span {
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
+  }
+
+  & > *:last-child > span {
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    border-bottom: none;
+  }
+
+  &--horizontal {
+    flex-direction: row;
+
+    & > * {
+      width: 50%
+    }
+
+    &-3 {
+      & > * {
+        width: 33%
+      }
+    }
+
+    &-4 {
+      & > * {
+        width: 25%
+      }
+    }
+
+    & > *:first-child > span {
+      border-radius: 8px 0 0 8px;
+    }
+
+    & > *:last-child > span {
+      border-radius: 0 8px 8px 0;
+      border-bottom: none;
+    }
+
+    & > * > span {
+      text-align: center;
+      justify-content: center;
+    }
+  }
+
+  * > input {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+  }
+
+
+  * > span {
+    display: flex;
+    padding: 10px 10px;
+    font-size: 13px;
+    font-weight: 500;
+    color: $text_color;
+    background: $bg_color;
+    border-bottom: 1px solid $secondary_bg_color;
+  }
+
+  * > span:last-child {
+    border: none;
+  }
+
+
+  * > input:not(:disabled):active + span {
+    background-color: $secondary_bg_color;
+    color: $hint_color
+  }
+
+
+  * > input:checked + span {
+    background-color: $button_color;
+    color: $button_text_color;
+
+    .radio-group__value {
+      color: $button_text_color;
+    }
+  }
+
+
+  * > input:disabled + span {
+    background-color: $secondary_bg_color;
+    color: $hint_color;
+
+    .radio-group__value {
+      color: $hint_color;
+    }
+  }
+}
+
+.form .form-control.invalid {
+  border: 1px solid red !important;
+}
+
