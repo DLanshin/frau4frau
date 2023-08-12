@@ -9,8 +9,8 @@ class OrderStore {
         makeAutoObservable(this)
     }
 
-    async fetchOrders() {
-        await $api.get(`/orders/get`).then(({data})=>{
+    async fetchOrders(user_id) {
+        await $api.get(`/orders/get/${user_id}`).then(({data})=>{
             this.isLoading = false;
             this.orders = data.data
             this.count = data.data.length

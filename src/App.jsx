@@ -16,7 +16,6 @@ const App = () => {
     }
     return (
         <BrowserRouter>
-            {user_id}
             <div className="wrapper">
                 <AppRouter/>
             </div>

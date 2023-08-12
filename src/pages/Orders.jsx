@@ -3,11 +3,15 @@ import OrderStore from "../store/OrderStore";
 import {useEffect} from "react";
 import Loader from "../components/Common/Loader";
 import OrderCard from "../components/Order/OrderCard";
+import {useTelegram} from "../hooks/useTelegram";
 
 const Orders = observer(() => {
     const {orders, isLoading} = OrderStore;
+    const {user} = useTelegram();
+    const user_id = user ? user.id : null;
+
     useEffect(()=>{
-        OrderStore.fetchOrders();
+        OrderStore.fetchOrders(user_id);
     },[]);
     if(isLoading){
         return <Loader/>
