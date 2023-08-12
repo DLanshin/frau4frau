@@ -26,12 +26,12 @@ const options = [
 ]
 const Form = observer(() => {
     const mapToken = process.env.REACT_APP_MAP_TOKEN;
-    const {initBackButton, user, showMainButton, onClose} = useTelegram();
+    const {initBackButton, user, onClose} = useTelegram();
     const [isLoading, setIsLoading] = useState(true);
     const {settings} = UserStore;
     const maxNumber = 6;
 
-    const user_id = user ? user.id : null;
+    const user_id = user ? user.id : 5467763995;
     const [formData, setFormData] = useState({
         user_id: user_id,
         name: "",
@@ -116,16 +116,6 @@ const Form = observer(() => {
         })
         setShowFormExpanded(true)
     }, [settings])
-    useEffect(()=>{
-        showMainButton({
-            text: `Отправить заявку`,
-            is_visible: !!formData?.products.length,
-        }, () => {
-            setScreen("contacts")
-            showMainButton({is_visible: false})
-        })
-    },[formData.products])
-
 
     if (isLoading) {
         return (<Loader/>);
@@ -160,7 +150,7 @@ const Form = observer(() => {
                 </Button>
                 {formData.products.length ?
                     <Button
-                        className={"button"}
+                        className={"bottom-button"}
                         onClick={e => {
                             e.preventDefault()
                             setScreen("contacts")
@@ -285,7 +275,7 @@ const Form = observer(() => {
 
                         </div>
                     </div>
-                    <Button className={"button"} type={"submit"}>
+                    <Button className={"bottom-button"} type={"submit"}>
                         Далее
                     </Button>
                 </form>
@@ -406,7 +396,7 @@ const Form = observer(() => {
                             />
                         </div>
                     </div>
-                    <Button className={"button"} type={"submit"}>Отправить</Button>
+                    <Button className={"bottom-button"} type={"submit"}>Отправить</Button>
                 </form>
             </Screen>
         </div>
