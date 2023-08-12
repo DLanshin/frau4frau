@@ -31,7 +31,7 @@ const Form = observer(() => {
     const {settings} = UserStore;
     const maxNumber = 6;
 
-    const user_id = user ? user.id : 5467763995;
+    const user_id = user ? user.id : null;
     showTelegramAlert(JSON.stringify(user));
     const [formData, setFormData] = useState({
         user_id: user_id,
@@ -236,7 +236,7 @@ const Form = observer(() => {
                                 type={"text"}
                                 name={"sku"}
                                 placeholder={"Артикул товара"}
-                                required={true}
+                                required={false}
                                 value={product.sku}
                                 onChange={(value) => setProduct({...product, sku: value})}
 

@@ -6,7 +6,7 @@ import "./assets/css/style.css"
 
 const App = () => {
     const {expandApp, user} = useTelegram();
-    const user_id = user ? user.id : 5467763995;
+    const user_id = user ? user.id : null;
 
     useEffect(() => {
         expandApp();
