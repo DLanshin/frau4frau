@@ -32,7 +32,6 @@ const Form = observer(() => {
     const maxNumber = 6;
 
     const user_id = user ? user.id : null;
-    showTelegramAlert(JSON.stringify(user));
     const [formData, setFormData] = useState({
         user_id: user_id,
         name: "",
