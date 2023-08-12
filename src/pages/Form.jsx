@@ -25,13 +25,13 @@ const options = [
     {value: 'vanilla', label: 'Vanilla'}
 ]
 const Form = observer(() => {
-    const mapToken = process.env.REACT_APP_MAP;
-    const {initBackButton, showTelegramAlert, user, showMainButton} = useTelegram();
+    const mapToken = process.env.REACT_APP_MAP_TOKEN;
+    const {initBackButton, user, showMainButton, onClose} = useTelegram();
     const [isLoading, setIsLoading] = useState(true);
     const {settings} = UserStore;
     const maxNumber = 6;
 
-    const user_id = user ? user.id : 5467763995;
+    const user_id = user ? user.id : null;
     const [formData, setFormData] = useState({
         user_id: user_id,
         name: "",
@@ -85,15 +85,7 @@ const Form = observer(() => {
             count: 1,
             images: "",
         })
-
         setScreen("products");
-        showMainButton({
-            text: `Отправить заявку`,
-            is_visible: !!formData?.products.length,
-        }, () => {
-            setScreen("contacts")
-            showMainButton({is_visible: false})
-        })
     }
 
 
@@ -101,27 +93,7 @@ const Form = observer(() => {
 
         OrderStore.createOrder(formData).then((res) => {
             setIsLoading(true)
-            showTelegramAlert(
-                "Ваша заявка успешно создана",
-                () => {
-                    setScreen("products");
-                    setTimeout(() => {
-                        setIsLoading(false);
-                    }, 1000)
-                }
-            )
-            setFormData({
-                name: "",
-                phone: "",
-                comment: "",
-                zip: "",
-                country: "",
-                state: "",
-                city: "",
-                address: "",
-                flat: "",
-                products: []
-            })
+            onClose()
         })
 
     }
@@ -144,6 +116,18 @@ const Form = observer(() => {
         })
         setShowFormExpanded(true)
     }, [settings])
+    useEffect(()=>{
+        debugger
+        showMainButton({
+            text: `Отправить заявку`,
+            is_visible: !!formData?.products.length,
+        }, () => {
+            setScreen("contacts")
+            showMainButton({is_visible: false})
+        })
+    },[formData.products])
+
+
     if (isLoading) {
         return (<Loader/>);
     }

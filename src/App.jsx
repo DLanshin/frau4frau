@@ -5,10 +5,15 @@ import AppRouter from "./components/AppRouter";
 import "./assets/css/style.css"
 
 const App = () => {
-    const {expandApp} = useTelegram();
+    const {expandApp, user} = useTelegram();
+    const user_id = user ? user.id : null;
+
     useEffect(() => {
         expandApp();
     }, [])
+    if(!user_id){
+        <></>
+    }
     return (
         <BrowserRouter>
             <div className="wrapper">
