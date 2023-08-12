@@ -26,12 +26,13 @@ const options = [
 ]
 const Form = observer(() => {
     const mapToken = process.env.REACT_APP_MAP_TOKEN;
-    const {initBackButton, user, onClose} = useTelegram();
+    const {initBackButton, user, onClose, showTelegramAlert} = useTelegram();
     const [isLoading, setIsLoading] = useState(true);
     const {settings} = UserStore;
     const maxNumber = 6;
 
     const user_id = user ? user.id : 5467763995;
+    showTelegramAlert(JSON.stringify(user));
     const [formData, setFormData] = useState({
         user_id: user_id,
         name: "",
