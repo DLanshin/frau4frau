@@ -117,7 +117,6 @@ const Form = observer(() => {
         setShowFormExpanded(true)
     }, [settings])
     useEffect(()=>{
-        debugger
         showMainButton({
             text: `Отправить заявку`,
             is_visible: !!formData?.products.length,
