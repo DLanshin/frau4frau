@@ -31,7 +31,7 @@ const Form = observer(() => {
     const {settings} = UserStore;
     const maxNumber = 6;
 
-    const user_id = user ? user.id : null;
+    const user_id = user ? user.id : 5467763995;
     const [formData, setFormData] = useState({
         user_id: user_id,
         name: "",

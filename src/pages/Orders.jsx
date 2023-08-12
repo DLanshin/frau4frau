@@ -8,7 +8,7 @@ import {useTelegram} from "../hooks/useTelegram";
 const Orders = observer(() => {
     const {orders, isLoading} = OrderStore;
     const {user} = useTelegram();
-    const user_id = user ? user.id : null;
+    const user_id = user ? user.id : 5467763995;
 
     useEffect(()=>{
         OrderStore.fetchOrders(user_id);
