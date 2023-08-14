@@ -33,7 +33,16 @@
     .svg-icon{
       width: 80px;
       height: 80px;
+      & > div{
+        width: 80px;
+        height: 80px;
+      }
+      svg{
+        width: 80px;
+        height: 80px;
+      }
     }
+
     span{
       display: block;
     }
