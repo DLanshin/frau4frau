@@ -42,6 +42,7 @@ const Form = observer(() => {
         link: "",
         sku: "",
         size: "",
+        color: "",
         count: 1,
         images: "",
     });
@@ -59,6 +60,7 @@ const Form = observer(() => {
             link: "",
             sku: "",
             size: "",
+            color: "",
             count: 1,
             images: "",
         })
