@@ -288,9 +288,6 @@ const Form = observer(() => {
                                 onChange={(value) => setFormData({...formData, phone: value})}
                             />
                         </div>
-                    </div>
-                    <div className={"form-block"}>
-                        <div className={"form-block__title"}>Адрес</div>
                         <div className="form">
                             <Input
                                 type={"text"}
