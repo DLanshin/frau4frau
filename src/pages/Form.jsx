@@ -28,6 +28,7 @@ const Form = observer(() => {
         user_id: user_id,
         name: "",
         phone: "",
+        recipient_name: "",
         comment: "",
         zip: "",
         country: "",
@@ -85,6 +86,7 @@ const Form = observer(() => {
             ...formData,
             name: settings?.name ?? "",
             phone: settings?.phone ?? "",
+            recipient_name: settings?.recipient_name ?? "",
             zip: settings?.address?.zip ?? "",
             country: settings?.address?.country ?? "",
             state: settings?.address?.state ?? "",
@@ -264,15 +266,23 @@ const Form = observer(() => {
                     sendRequest(e)
                 }}>
                     <div className={"form-block"}>
+                        <Input
+                            required={true}
+                            type={"text"}
+                            name={"name"}
+                            placeholder={"Ваше имя"}
+                            value={formData.name}
+                            onChange={(value) => setFormData({...formData, name: value})}
+                        />
                         <div className={"form-block__title"}>Почтовые реквизиты получателя<br/> <small>(заполнять латиницей)</small></div>
                         <div className="form">
                             <Input
                                 required={true}
                                 type={"text"}
-                                name={"name"}
-                                placeholder={"Фамилия, Имя"}
-                                value={formData.name}
-                                onChange={(value) => setFormData({...formData, name: value})}
+                                name={"recipient_name"}
+                                placeholder={"Имя"}
+                                value={formData.recipient_name}
+                                onChange={(value) => setFormData({...formData, recipient_name: value})}
                             />
                             <PhoneInput
                                 inputProps={{
@@ -283,6 +293,7 @@ const Form = observer(() => {
                                 placeholder={"+7 (___) ___-__-__"}
                                 // onlyCountries={["ru", "by", "kz"]}
                                 localization={ru}
+
                                 country={'ru'}
                                 value={formData.phone}
                                 onChange={(value) => setFormData({...formData, phone: value})}
