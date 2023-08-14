@@ -5,8 +5,7 @@ import AppRouter from "./components/AppRouter";
 import "./assets/css/style.css"
 
 const App = () => {
-    const {expandApp, user} = useTelegram();
-    const user_id = user ? user.id : null;
+    const {expandApp, user_id} = useTelegram();
 
     useEffect(() => {
         expandApp();

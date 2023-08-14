@@ -28,7 +28,8 @@
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
-      width: 154px;
+      max-width: 154px;
+      width: 100%;
       display: inline-flex;
       color: $link_color;
     }

@@ -25,9 +25,6 @@
     justify-content: space-between;
     height: 35px;
   }
-  mapbox-address-autofill{
-    width: 100%;
-  }
 }
 
 .input, .select, {
@@ -43,43 +40,20 @@
   outline: none;
   color: $text_color;
 }
-
-.creatable-select {
-  color: $text_color;
+.textarea{
+  width: 100%;
+  position: relative;
+  font-size: 14px;
+  padding: 8px;
   background: $bg_color;
-
-  [class*=control] {
-    color: $text_color;
-    background: $bg_color;
-    border: none;
-  }
-
-  [class*=indicatorSeparator] {
-    background: $text_color;
-  }
-  [class*=Svg] {
-    fill: $text_color;
-  }
-  [class*=menu] {
-    margin: 0;
-    border-radius: 0 0 5px 5px;
-    border: none;
-    background: $secondary_bg_color;
-    & *:hover, & *:focus{
-      background: $secondary_bg_color;
-    }
-  }
-
-
-  [class*=singleValue] {
-    color: $text_color;
-  }
-
-  [data-value] {
-    color: $text_color !important;
-
-  }
+  border: none;
+  line-height: 25px;
+  outline: none;
+  color: $text_color;
+  min-height: 100px;
+  resize: none;
 }
+
 
 .form {
   border-radius: 8px;
@@ -91,7 +65,7 @@
   }
 
   & > *:first-child {
-    input, div {
+    input, textarea {
       color: $text_color;
       border-top-right-radius: 8px;
       border-top-left-radius: 8px;
@@ -101,7 +75,7 @@
   & > *:last-child {
     border-bottom: none;
 
-    input, div {
+    input, textarea {
       border-bottom-right-radius: 8px;
       border-bottom-left-radius: 8px;
     }

@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
 import ImageUploading from 'react-images-uploading';
-import CreatableSelect from 'react-select/creatable';
 import PhoneInput from "react-phone-input-2";
 import 'react-phone-input-2/lib/style.css'
 import ru from 'react-phone-input-2/lang/ru.json'
@@ -17,21 +16,14 @@ import Button from "../components/Form/Button";
 import QuantityControl from "../components/Form/QuantityControl";
 import UserStore from "../store/UserStore";
 import Input from "../components/Form/Input";
-import {colors} from "../data/colors"
+import TextArea from "../components/Form/TextArea";
 
-const options = [
-    {value: 'chocolate', label: 'Chocolate'},
-    {value: 'strawberry', label: 'Strawberry'},
-    {value: 'vanilla', label: 'Vanilla'}
-]
 const Form = observer(() => {
-    const mapToken = process.env.REACT_APP_MAP_TOKEN;
-    const {initBackButton, user, onClose, showTelegramAlert} = useTelegram();
+    const {initBackButton, user_id, onClose} = useTelegram();
     const [isLoading, setIsLoading] = useState(true);
     const {settings} = UserStore;
     const maxNumber = 6;
 
-    const user_id = user ? user.id : null;
     const [formData, setFormData] = useState({
         user_id: user_id,
         name: "",
@@ -42,7 +34,6 @@ const Form = observer(() => {
         state: "",
         city: "",
         address: "",
-        flat: "",
         products: []
     });
 
@@ -54,24 +45,10 @@ const Form = observer(() => {
         count: 1,
         images: "",
     });
-    const [showFormExpanded, setShowFormExpanded] = useState(false);
     const [screen, setScreen] = useState("products")
 
 
-    const handleRetrieve = (res) => {
-        const feature = res.features[0];
 
-        setFormData({
-            ...formData,
-            country: feature.properties.country,
-            zip: feature.properties.postcode,
-            state: feature.properties.address_level1,
-            city: feature.properties.address_level2,
-            address: feature.properties.address_line1,
-            flat: feature.properties.address_line2
-        })
-        setShowFormExpanded(true)
-    }
     const onChange = (imageList, addUpdateIndex) => {
         setProduct({...product, images: imageList});
     };
@@ -111,9 +88,7 @@ const Form = observer(() => {
             state: settings?.address?.state ?? "",
             city: settings?.address?.city ?? "",
             address: settings?.address?.address ?? "",
-            flat: settings?.address?.flat ?? "",
         })
-        setShowFormExpanded(true)
     }, [settings])
 
     if (isLoading) {
@@ -135,7 +110,7 @@ const Form = observer(() => {
                     ))}
                 </div>
                 <Button
-                    className={"button button--default"}
+                    className={"button--lg button--default"}
                     onClick={e => {
                         e.preventDefault()
                         setScreen("add_product")
@@ -166,6 +141,7 @@ const Form = observer(() => {
                 }
             </Screen>
             <Screen className={`screen ${screen === "add_product" ? "" : "display-none"}`}>
+
                 <div className={"form-block"}>
                     <div className={"form-block__title"}>Фотографии товара</div>
                     <div className="form">
@@ -186,15 +162,22 @@ const Form = observer(() => {
                                   }) => (
                                     // write your building UI
                                     <div className="upload-images__wrapper">
-                                        <button
-                                            className={"upload-images__add-button"}
-                                            style={isDragging ? {color: 'red'} : undefined}
-                                            onClick={onImageUpload}
-                                            {...dragProps}
-                                        >
-                                            <ReactSVG className={'svg-icon'} src={uploadIcon}/>
-                                            <span>Загрузить изображения</span>
-                                        </button>
+                                        {
+                                            !product?.images.length ?
+                                                <button
+                                                    className={"upload-images__add-button"}
+                                                    style={isDragging ? {color: 'red'} : undefined}
+                                                    onClick={onImageUpload}
+                                                    {...dragProps}
+                                                >
+                                                    <ReactSVG className={'svg-icon'} src={uploadIcon}/>
+                                                    <span>Загрузить изображения</span>
+                                                </button>
+                                                :
+                                                null
+
+                                        }
+
                                         <div className="upload-images__list">
                                             {imageList.map((image, index) => (
                                                 <div key={index} className="upload-images__item">
@@ -211,7 +194,6 @@ const Form = observer(() => {
                         </div>
                     </div>
                 </div>
-
                 <form onSubmit={(e) => {
                     e.preventDefault()
                     addProduct(product)
@@ -246,18 +228,13 @@ const Form = observer(() => {
                                 required={false}
                                 onChange={(value) => setProduct({...product, size: value})}
                             />
-                            <CreatableSelect
-                                className={"creatable-select"}
-                                placeholder={"Выберите цвет"}
-                                isClearable
+                            <Input
+                                name="color"
+                                placeholder="Цвет"
                                 value={product.color}
                                 required={false}
-                                onChange={(e) => {
-                                    setProduct({...product, color: e})
-                                    console.log(product)
-                                }
-                                }
-                                options={colors}/>
+                                onChange={(value) => setProduct({...product, color: value})}
+                            />
 
                             <div className={"input-container input-container--row"}>
                                 <label>Кол-во</label>
@@ -285,13 +262,13 @@ const Form = observer(() => {
                     sendRequest(e)
                 }}>
                     <div className={"form-block"}>
-                        <div className={"form-block__title"}>Контактные данные</div>
+                        <div className={"form-block__title"}>Почтовые реквизиты получателя<br/> <small>(заполнять латиницей)</small></div>
                         <div className="form">
                             <Input
                                 required={true}
                                 type={"text"}
                                 name={"name"}
-                                placeholder={"Ваше имя"}
+                                placeholder={"Фамилия, Имя"}
                                 value={formData.name}
                                 onChange={(value) => setFormData({...formData, name: value})}
                             />
@@ -302,96 +279,68 @@ const Form = observer(() => {
                                 }}
                                 defaultErrorMessage={"Обязательное поле для заполнения"}
                                 placeholder={"+7 (___) ___-__-__"}
-                                onlyCountries={["ru", "by", "kz"]}
+                                // onlyCountries={["ru", "by", "kz"]}
                                 localization={ru}
                                 country={'ru'}
                                 value={formData.phone}
                                 onChange={(value) => setFormData({...formData, phone: value})}
-                            />
-                            <Input
-                                type={"text"}
-                                name={"comment"}
-                                placeholder={"Комментарий"}
-                                value={formData.comment}
-                                onChange={(value) => setFormData({...formData, comment: value})}
                             />
                         </div>
                     </div>
                     <div className={"form-block"}>
                         <div className={"form-block__title"}>Адрес</div>
                         <div className="form">
-                            <div className={"input-container"}>
-                                <AddressAutofill
-                                    accessToken={mapToken}
-                                    onRetrieve={handleRetrieve}
-                                    options={{
-                                        language: 'ru',
-                                        country: 'RU',
-                                    }}
-                                >
-                                    <input
-                                        required={true}
-                                        className={"input"}
-                                        name={"address"}
-                                        placeholder={"Адрес"}
-                                        type="text"
-                                        autoComplete="address-line1"
-                                        value={formData.address}
-                                        onChange={(e) => setFormData({...formData, address: e.target.value})}
-                                    />
-                                </AddressAutofill>
-                            </div>
                             <Input
-                                className={!showFormExpanded ? 'display-none' : ""}
                                 type={"text"}
                                 name={"country"}
                                 required={true}
                                 placeholder={"Страна"}
-                                autoComplete="country-name"
                                 value={formData.country}
                                 onChange={(value) => setFormData({...formData, country: value})}
 
                             />
                             <Input
-                                className={!showFormExpanded ? 'display-none' : ""}
                                 type={"number"}
                                 name={"zip"}
                                 required={true}
                                 placeholder={"Индекс"}
-                                autoComplete="postal-code"
                                 value={formData.zip}
                                 onChange={(value) => setFormData({...formData, zip: value})}
 
                             />
                             <Input
-                                className={!showFormExpanded ? 'display-none' : ""}
                                 type={"text"}
                                 name={"region"}
-                                required={true}
-                                placeholder={"Область"}
-                                autoComplete="address-level1"
+                                required={false}
+                                placeholder={"Регион"}
                                 value={formData.state}
                                 onChange={(value) => setFormData({...formData, state: value})}
                             />
                             <Input
-                                className={!showFormExpanded ? 'display-none' : ""}
                                 type={"text"}
                                 name={"city"}
                                 required={true}
                                 placeholder={"Город"}
-                                autoComplete="address-level2"
                                 value={formData.city}
                                 onChange={(value) => setFormData({...formData, city: value})}
                             />
                             <Input
-                                className={!showFormExpanded ? 'display-none' : ""}
                                 type={"text"}
-                                name={"street"}
+                                name={"address"}
                                 required={true}
-                                placeholder={"Квартира, строение"}
-                                autoComplete="address-line2"
-                                value={formData.flat}
-                                onChange={(value) => setFormData({...formData, flat: value})}
+                                placeholder={"Улица, дом, квартира"}
+                                value={formData.address}
+                                onChange={(value) => setFormData({...formData, address: value})}
+                            />
+                        </div>
+                    </div>
+                    <div className={"form-block"}>
+                        <div className="form">
+                            <TextArea
+                                name={"comment"}
+                                placeholder={"Комментарий к заказу"}
+                                value={formData.comment}
+                                onChange={(value) => setFormData({...formData, comment: value})}
                             />
                         </div>
                     </div>
