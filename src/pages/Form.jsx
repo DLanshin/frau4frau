@@ -68,8 +68,8 @@ const Form = observer(() => {
         setScreen("products");
     }
 
-    const submitForm = () => {
-        document.querySelector("#mainForm").requestSubmit();
+    const submitForm = (form) => {
+        document.querySelector(form).requestSubmit();
     }
     const sendRequest = () => {
         setIsLoading(true)
@@ -108,7 +108,7 @@ const Form = observer(() => {
             showMainButton({
                 is_visible:true
             },()=>{
-                submitForm()
+                submitForm("#mainForm")
             })
         }else{
             showMainButton({is_visible:false})
@@ -274,9 +274,6 @@ const Form = observer(() => {
 
                         </div>
                     </div>
-                    <Button className={"bottom-button"} type={"submit"}>
-                        Далее
-                    </Button>
                 </form>
             </Screen>
             <Screen className={`screen ${screen === "contacts" ? "" : "display-none"}`}>
@@ -373,7 +370,6 @@ const Form = observer(() => {
                             />
                         </div>
                     </div>
-                    <Button className={"bottom-button"} type={"submit"}>Отправить</Button>
                 </form>
             </Screen>
         </div>
