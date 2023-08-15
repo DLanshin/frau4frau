@@ -47,7 +47,7 @@ const Form = observer(() => {
         count: 1,
         images: "",
     });
-    const [screen, setScreen] = useState("products")
+    const [screen, setScreen] = useState("contacts")
 
 
 
@@ -67,7 +67,6 @@ const Form = observer(() => {
         })
         setScreen("products");
     }
-
     const submitForm = (form) => {
         document.querySelector(form).requestSubmit();
     }
@@ -282,21 +281,26 @@ const Form = observer(() => {
                     sendRequest(e)
                 }}>
                     <div className={"form-block"}>
-                        <Input
-                            required={true}
-                            type={"text"}
-                            name={"name"}
-                            placeholder={"Ваше имя"}
-                            value={formData.name}
-                            onChange={(value) => setFormData({...formData, name: value})}
-                        />
+                        <div className="form">
+                            <Input
+                                required={true}
+                                type={"text"}
+                                name={"name"}
+                                placeholder={"Ваше имя"}
+                                value={formData.name}
+                                onChange={(value) => setFormData({...formData, name: value})}
+                            />
+                        </div>
+                    </div>
+                    <div className={"form-block"}>
+
                         <div className={"form-block__title"}>Почтовые реквизиты получателя<br/> <small>(заполнять латиницей)</small></div>
                         <div className="form">
                             <Input
                                 required={true}
                                 type={"text"}
                                 name={"recipient_name"}
-                                placeholder={"Имя"}
+                                placeholder={"Фамилия, имя получателя"}
                                 value={formData.recipient_name}
                                 onChange={(value) => setFormData({...formData, recipient_name: value})}
                             />
