@@ -19,7 +19,7 @@ import Input from "../components/Form/Input";
 import TextArea from "../components/Form/TextArea";
 
 const Form = observer(() => {
-    const {initBackButton, user_id, onClose} = useTelegram();
+    const {initBackButton, user_id, onClose, showMainButton} = useTelegram();
     const [isLoading, setIsLoading] = useState(true);
     const {settings} = UserStore;
     const maxNumber = 6;
@@ -68,7 +68,9 @@ const Form = observer(() => {
         setScreen("products");
     }
 
-
+    const submitForm = () => {
+        document.querySelector("#mainForm").requestSubmit();
+    }
     const sendRequest = () => {
         setIsLoading(true)
         OrderStore.createOrder(formData).then((res) => {
@@ -94,6 +96,24 @@ const Form = observer(() => {
             address: settings?.address?.address ?? "",
         })
     }, [settings])
+
+    useEffect(()=>{
+        if(screen === "products" && formData.products.length){
+            showMainButton({
+                is_visible:true
+            },()=>{
+                setScreen("contacts")
+            })
+        }else if(screen === "contacts"){
+            showMainButton({
+                is_visible:true
+            },()=>{
+                submitForm()
+            })
+        }else{
+            showMainButton({is_visible:false})
+        }
+    }, [screen]);
 
     if (isLoading) {
         return (<Loader/>);
@@ -145,7 +165,6 @@ const Form = observer(() => {
                 }
             </Screen>
             <Screen className={`screen ${screen === "add_product" ? "" : "display-none"}`}>
-
                 <div className={"form-block"}>
                     <div className={"form-block__title"}>Фотографии товара</div>
                     <div className="form">
@@ -261,7 +280,7 @@ const Form = observer(() => {
                 </form>
             </Screen>
             <Screen className={`screen ${screen === "contacts" ? "" : "display-none"}`}>
-                <form onSubmit={(e) => {
+                <form id={"mainForm"} onSubmit={(e) => {
                     e.preventDefault()
                     sendRequest(e)
                 }}>
