@@ -47,7 +47,7 @@ const Form = observer(() => {
         count: 1,
         images: "",
     });
-    const [screen, setScreen] = useState("contacts")
+    const [screen, setScreen] = useState("products")
 
 
 
