@@ -113,7 +113,7 @@ const Form = observer(() => {
         }else{
             showMainButton({is_visible:false})
         }
-    }, [screen]);
+    }, [formData.products.length, screen]);
 
     if (isLoading) {
         return (<Loader/>);
