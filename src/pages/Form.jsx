@@ -110,6 +110,12 @@ const Form = observer(() => {
             },()=>{
                 submitForm("#mainForm")
             })
+        }else if(screen === "add_product") {
+            showMainButton({
+                is_visible:true
+            },()=>{
+                submitForm("#addProductForm")
+            })
         }else{
             showMainButton({is_visible:false})
         }
@@ -217,7 +223,7 @@ const Form = observer(() => {
                         </div>
                     </div>
                 </div>
-                <form onSubmit={(e) => {
+                <form id={"addProductForm"} onSubmit={(e) => {
                     e.preventDefault()
                     addProduct(product)
                     setScreen("products")
