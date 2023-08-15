@@ -99,24 +99,31 @@ const Form = observer(() => {
 
     useEffect(()=>{
         if(screen === "products" && formData.products.length){
+            console.log("show next button")
             showMainButton({
+                text: `Далее`,
                 is_visible:true
             },()=>{
                 setScreen("contacts")
             })
         }else if(screen === "contacts"){
+            console.log("show add product button")
             showMainButton({
-                is_visible:true
+                is_visible:true,
+                text: `Оформить заказ`,
             },()=>{
                 submitForm("#mainForm")
             })
         }else if(screen === "add_product") {
+            console.log("show add product button")
             showMainButton({
-                is_visible:true
+                is_visible:true,
+                text: `Добавить`,
             },()=>{
                 submitForm("#addProductForm")
             })
         }else{
+            console.log("disable button")
             showMainButton({is_visible:false})
         }
     }, [formData.products.length, screen]);
