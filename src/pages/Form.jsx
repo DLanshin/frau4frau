@@ -71,6 +71,7 @@ const Form = observer(() => {
         document.querySelector(form).requestSubmit();
     }
     const sendRequest = () => {
+        showMainButton({is_visible:false})
         setIsLoading(true)
         OrderStore.createOrder(formData).then((res) => {
             onClose()
