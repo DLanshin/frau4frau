@@ -105,6 +105,10 @@ const Form = observer(() => {
                 is_visible:true
             },()=>{
                 setScreen("contacts")
+                initBackButton(true, () => {
+                    setScreen("products");
+                    initBackButton(false)
+                })
             })
         }else if(screen === "contacts"){
             console.log("show add product button")
@@ -159,23 +163,6 @@ const Form = observer(() => {
                 >
                     + Добавить товар
                 </Button>
-                {formData.products.length ?
-                    <Button
-                        className={"bottom-button"}
-                        onClick={e => {
-                            e.preventDefault()
-                            setScreen("contacts")
-                            initBackButton(true, () => {
-                                setScreen("products");
-                                initBackButton(false)
-                            })
-                        }}
-                    >
-                        Отправить заявку
-                    </Button>
-                    :
-                    null
-                }
             </Screen>
             <Screen className={`screen ${screen === "add_product" ? "" : "display-none"}`}>
                 <div className={"form-block"}>
