@@ -74,7 +74,6 @@ const Form = observer(() => {
         showMainButton({is_visible:false})
         setIsLoading(true)
         OrderStore.createOrder(formData).then((res) => {
-            console.log("order sent")
             onClose()
         })
 
@@ -164,8 +163,6 @@ const Form = observer(() => {
                 >
                     + Добавить товар
                 </Button>
-                <button onClick={()=>{setScreen("contacts")}}>submit</button>
-
             </Screen>
             <Screen className={`screen ${screen === "add_product" ? "" : "display-none"}`}>
                 <div className={"form-block"}>
@@ -277,7 +274,6 @@ const Form = observer(() => {
 
                         </div>
                     </div>
-                    <button type={"submit"}>submit</button>
                 </form>
             </Screen>
             <Screen className={`screen ${screen === "contacts" ? "" : "display-none"}`}>
@@ -379,7 +375,6 @@ const Form = observer(() => {
                             />
                         </div>
                     </div>
-                    <button type={"submit"}>submit</button>
                 </form>
             </Screen>
         </div>
