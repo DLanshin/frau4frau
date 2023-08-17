@@ -7,7 +7,7 @@ const Loader = () => {
             <ReactSVG className={'svg-icon'} src={cartIcon}/>
             <div className="preloader__text">
                 <p className="preloader__msg">Идет загрузка…</p>
-                <p className="preloader__msg preloader__msg--last">Слишком долго загружается? Возможно что-то пошло не так.</p>
+                <p className="preloader__msg preloader__msg--last">Слишком долго загружается? Возможно вы загрузили изображения большего размера</p>
             </div>
         </div>
     );
