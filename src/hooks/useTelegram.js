@@ -9,6 +9,7 @@ export function useTelegram(){
     }
 
     const showMainButton = (props, onClick) =>{
+        console.log(onClick)
         if(props.is_visible && onClick){
             tg?.MainButton.setParams(props);
             tg.MainButton.onClick(onClick);

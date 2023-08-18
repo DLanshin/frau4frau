@@ -97,7 +97,7 @@ const Form = observer(() => {
         })
     }, [settings])
 
-    const mainButtonOnClick = (screen) => {
+    function mainButtonOnClick(screen){
         if(screen === "products" && formData.products.length) {
             setScreen("contacts")
             initBackButton(true, () => {
@@ -117,24 +117,32 @@ const Form = observer(() => {
     }
 
     useEffect(()=>{
+        console.log(mainButtonOnClick)
         if(screen === "products" && formData.products.length){
             console.log("show next button")
             showMainButton({
                 text: `Далее`,
                 is_visible:true
-            },mainButtonOnClick(screen))
+            }, mainButtonOnClick(screen))
         }else if(screen === "contacts"){
+            console.log("add order main button")
             showMainButton({
                 is_visible:true,
                 text: `Оформить заказ`,
             },mainButtonOnClick(screen))
         }else if(screen === "add_product") {
+            console.log("add Product main button")
             showMainButton({
                 is_visible:true,
                 text: `Добавить`,
             },mainButtonOnClick(screen))
         }else{
+            console.log("hide button")
             showMainButton({is_visible:false, mainButtonOnClick})
+        }
+        return ()=>{
+            showMainButton({is_visible:false, mainButtonOnClick})
+            console.log("return")
         }
     }, [formData.products.length, screen]);
 
