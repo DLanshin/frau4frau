@@ -97,40 +97,44 @@ const Form = observer(() => {
         })
     }, [settings])
 
+    const mainButtonOnClick = (screen) => {
+        if(screen === "products" && formData.products.length) {
+            setScreen("contacts")
+            initBackButton(true, () => {
+                showMainButton({is_visible:false, mainButtonOnClick})
+                setScreen("products");
+                initBackButton(false)
+            })
+        }else if(screen === "contacts"){
+            submitForm("#mainForm")
+        }else if(screen === "add_product") {
+            initBackButton(false);
+            submitForm("#addProductForm")
+        }else{
+            showMainButton({is_visible:false, mainButtonOnClick})
+
+        }
+    }
+
     useEffect(()=>{
         if(screen === "products" && formData.products.length){
             console.log("show next button")
             showMainButton({
                 text: `Далее`,
                 is_visible:true
-            },()=>{
-                setScreen("contacts")
-                initBackButton(true, () => {
-                    showMainButton({is_visible:false})
-                    setScreen("products");
-                    initBackButton(false)
-                })
-            })
+            },mainButtonOnClick(screen))
         }else if(screen === "contacts"){
-            console.log("show add product button")
             showMainButton({
                 is_visible:true,
                 text: `Оформить заказ`,
-            },()=>{
-                submitForm("#mainForm")
-            })
+            },mainButtonOnClick(screen))
         }else if(screen === "add_product") {
-            console.log("show add product button")
             showMainButton({
                 is_visible:true,
                 text: `Добавить`,
-            },()=>{
-                initBackButton(false);
-                submitForm("#addProductForm")
-            })
+            },mainButtonOnClick(screen))
         }else{
-            console.log("disable button")
-            showMainButton({is_visible:false})
+            showMainButton({is_visible:false, mainButtonOnClick})
         }
     }, [formData.products.length, screen]);
 
