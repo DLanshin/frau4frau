@@ -97,52 +97,48 @@ const Form = observer(() => {
         })
     }, [settings])
 
-    function mainButtonOnClick(screen){
-        if(screen === "products" && formData.products.length) {
-            setScreen("contacts")
-            initBackButton(true, () => {
-                showMainButton({is_visible:false, mainButtonOnClick})
-                setScreen("products");
-                initBackButton(false)
-            })
-        }else if(screen === "contacts"){
-            submitForm("#mainForm")
-        }else if(screen === "add_product") {
-            initBackButton(false);
-            submitForm("#addProductForm")
-        }else{
-            showMainButton({is_visible:false, mainButtonOnClick})
-
-        }
+    const mbProductsClick = () =>{
+        setScreen("contacts")
+        initBackButton(true, () => {
+            setScreen("products");
+            initBackButton(false)
+        })
+    }
+    const mbContactsClick = () =>{
+        submitForm("#mainForm")
+    }
+    const mbAddProductClick = () =>{
+        submitForm("#mainForm")
     }
 
     useEffect(()=>{
-        console.log(mainButtonOnClick)
         if(screen === "products" && formData.products.length){
             console.log("show next button")
             showMainButton({
                 text: `Далее`,
                 is_visible:true
-            }, mainButtonOnClick(screen))
+            }, mbProductsClick)
+            return ()=>{
+                showMainButton({is_visible: false, mbProductsClick})
+            }
         }else if(screen === "contacts"){
             console.log("add order main button")
             showMainButton({
                 is_visible:true,
                 text: `Оформить заказ`,
-            },mainButtonOnClick(screen))
+            },mbContactsClick)
+            return ()=>{
+                showMainButton({is_visible: false, mbContactsClick})
+            }
         }else if(screen === "add_product") {
             console.log("add Product main button")
             showMainButton({
                 is_visible:true,
                 text: `Добавить`,
-            },mainButtonOnClick(screen))
-        }else{
-            console.log("hide button")
-            showMainButton({is_visible:false, mainButtonOnClick})
-        }
-        return ()=>{
-            showMainButton({is_visible:false, mainButtonOnClick})
-            console.log("return")
+            },mbAddProductClick)
+            return ()=>{
+                showMainButton({is_visible: false, mbAddProductClick})
+            }
         }
     }, [formData.products.length, screen]);
 
