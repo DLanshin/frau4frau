@@ -15,6 +15,7 @@ export function useTelegram(){
             tg?.MainButton.show();
         }else{
             tg?.MainButton.hide();
+            tg?.MainBuoon.offClick()
         }
     }
     const showTelegramAlert = (message, callback) =>{
