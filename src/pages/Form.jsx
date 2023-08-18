@@ -98,11 +98,9 @@ const Form = observer(() => {
     }, [settings])
 
     const mbProductsClick = () =>{
-        alert("Press: GO TO FORM")
         setScreen("contacts")
         initBackButton(true, () => {
             setScreen("products");
-            alert("Press: COME BACK")
             initBackButton(false)
         })
     }
