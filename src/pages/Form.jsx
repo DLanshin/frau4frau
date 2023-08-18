@@ -98,18 +98,22 @@ const Form = observer(() => {
     }, [settings])
 
     const mbProductsClick = () =>{
+        alert("Press: GO TO FORM")
         setScreen("contacts")
         initBackButton(true, () => {
             setScreen("products");
+            alert("Press: COME BACK")
             initBackButton(false)
         })
     }
     const mbContactsClick = () =>{
-        submitForm("#mainForm")
+        alert("Press: SEND REQUEST")
+        // submitForm("#mainForm")
     }
     const mbAddProductClick = () =>{
+        alert("Press: ADD PRODUCT")
         initBackButton(false)
-        submitForm("#addProductForm")
+        // submitForm("#addProductForm")
     }
 
     useEffect(()=>{
