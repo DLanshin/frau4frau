@@ -107,11 +107,9 @@ const Form = observer(() => {
         })
     }
     const mbContactsClick = () =>{
-        alert("Press: SEND REQUEST")
         // submitForm("#mainForm")
     }
     const mbAddProductClick = () =>{
-        alert("Press: ADD PRODUCT")
         initBackButton(false)
         submitForm("#addProductForm")
     }

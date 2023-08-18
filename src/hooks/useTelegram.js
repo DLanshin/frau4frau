@@ -35,6 +35,12 @@ export function useTelegram(){
                 tg?.BackButton.hide()
             })
             tg?.BackButton.show()
+            return ()=>{
+                tg?.BackButton.offClick(()=>{
+                    onClick()
+                    tg?.BackButton.hide()
+                })
+            }
         }
     }
     return {
