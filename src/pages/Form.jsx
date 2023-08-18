@@ -71,7 +71,6 @@ const Form = observer(() => {
         document.querySelector(form).requestSubmit();
     }
     const sendRequest = () => {
-        showMainButton({is_visible:false})
         setIsLoading(true)
         OrderStore.createOrder(formData).then((res) => {
             onClose()
@@ -391,7 +390,7 @@ const Form = observer(() => {
                             />
                         </div>
                     </div>
-                    {/*<button type={"submit"}>Submit</button>*/}
+                    {/*<span onClick={mbContactsClick}>Submit</span>*/}
                 </form>
             </Screen>
         </div>
