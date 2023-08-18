@@ -105,7 +105,7 @@ const Form = observer(() => {
         })
     }
     const mbContactsClick = () =>{
-        // submitForm("#mainForm")
+        submitForm("#mainForm")
     }
     const mbAddProductClick = () =>{
         initBackButton(false)
