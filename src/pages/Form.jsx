@@ -108,7 +108,7 @@ const Form = observer(() => {
         submitForm("#mainForm")
     }
     const mbAddProductClick = () =>{
-        submitForm("#mainForm")
+        submitForm("#addProductForm")
     }
 
     useEffect(()=>{

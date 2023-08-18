@@ -1,3 +1,5 @@
+import SettingsStore from "../store/SettingsStore";
+
 const tg = window.Telegram.WebApp;
 export function useTelegram(){
 
@@ -9,7 +11,12 @@ export function useTelegram(){
     }
 
     const showMainButton = (props, onClick) =>{
-        console.log(onClick)
+        if(process.env.REACT_APP_MODE === "dev"){
+            const {mainButton} = SettingsStore;
+            mainButton.onClick = onClick
+            mainButton.show = props.is_visible
+            mainButton.text = props.text ?? ""
+        }
         if(props.is_visible && onClick){
             tg?.MainButton.setParams(props);
             tg.MainButton.onClick(onClick);
@@ -33,6 +40,11 @@ export function useTelegram(){
         tg?.close()
     }
     const initBackButton = (isShow, onClick) => {
+        if(process.env.REACT_APP_MODE === "dev"){
+            const { backButton} = SettingsStore;
+            backButton.onClick = onClick
+            backButton.show = isShow
+        }
         if(isShow){
             tg?.BackButton.onClick(onClick)
             tg?.BackButton.show()
