@@ -41,7 +41,7 @@ export function useTelegram(){
     return {
         tg,
         user:tg.initDataUnsafe?.user,
-        user_id:process.env.REACT_APP_MODE === 'dev' ? 5467763995 : tg.initDataUnsafe?.user?.id,
+        user_id:process.env.REACT_APP_MODE === 'dev' ? 321802111 : tg.initDataUnsafe?.user?.id,
         onClose,
         showMainButton,
         showTelegramConfirm,

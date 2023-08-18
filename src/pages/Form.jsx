@@ -124,6 +124,7 @@ const Form = observer(() => {
                 is_visible:true,
                 text: `Добавить`,
             },()=>{
+                initBackButton(false);
                 submitForm("#addProductForm")
             })
         }else{
@@ -163,6 +164,7 @@ const Form = observer(() => {
                 >
                     + Добавить товар
                 </Button>
+                <button onClick={()=>{setScreen("contacts")}}>Submit</button>
             </Screen>
             <Screen className={`screen ${screen === "add_product" ? "" : "display-none"}`}>
                 <div className={"form-block"}>
@@ -274,6 +276,7 @@ const Form = observer(() => {
 
                         </div>
                     </div>
+                    <button type={"submit"}>Submit</button>
                 </form>
             </Screen>
             <Screen className={`screen ${screen === "contacts" ? "" : "display-none"}`}>
@@ -375,6 +378,7 @@ const Form = observer(() => {
                             />
                         </div>
                     </div>
+                    <button type={"submit"}>Submit</button>
                 </form>
             </Screen>
         </div>
