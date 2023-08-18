@@ -108,6 +108,7 @@ const Form = observer(() => {
         submitForm("#mainForm")
     }
     const mbAddProductClick = () =>{
+        initBackButton(false)
         submitForm("#addProductForm")
     }
 
