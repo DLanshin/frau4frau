@@ -7,15 +7,26 @@ const OrderCard = ({object}) => {
         <div className={"order-card"}>
             <div className="order-card__header">
                 <div className="order-card__title">
-                    {object?.created_at} #{object.id}
+                    Заявка №{object.id} от {object?.created_at}
                 </div>
             </div>
             <div className="order-card__body">
+                <div className="order-card__info">
+                    Почтовые реквизиты получателя
+                </div>
                 <div className="order-card__info order-card__info--hint">
                     {object?.address?.zip} {object?.address?.country} {object?.address?.state} {object?.address?.city} {object?.address?.address} {object?.address?.flat}
                 </div>
+                <br/>
+                <div className="order-card__info">
+                    Комментарий к заявке
+                </div>
                 <div className="order-card__info order-card__info--hint">
                     {object?.comment}
+                </div>
+                <br/>
+                <div className="order-card__info">
+                    Товары
                 </div>
                 <div className="order-card__info">
                     <ul>
