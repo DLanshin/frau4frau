@@ -148,7 +148,7 @@ const Form = observer(() => {
                 mainButton.offClick(mbAddProductClick);
             }
         }
-    }, [formData.products.length, screen, mbProductsClick, mbContactsClick, mbAddProductClick]);
+    }, [formData.products.length, screen]);
 
     if (isLoading) {
         return (<Loader/>);
