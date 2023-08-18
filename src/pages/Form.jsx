@@ -113,7 +113,7 @@ const Form = observer(() => {
     const mbAddProductClick = () =>{
         alert("Press: ADD PRODUCT")
         initBackButton(false)
-        // submitForm("#addProductForm")
+        submitForm("#addProductForm")
     }
 
     useEffect(()=>{
