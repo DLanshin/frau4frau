@@ -19,11 +19,11 @@ export function useTelegram(){
         }
         if(props.is_visible && onClick){
             tg?.MainButton.setParams(props);
-            tg.MainButton.onClick(onClick);
             tg?.MainButton.show();
+            tg.onEvent('mainButtonClicked', onClick)
         }else{
+            tg.offEvent('mainButtonClicked', onClick)
             tg?.MainButton.hide();
-            tg?.MainButton.offClick(onClick);
         }
     }
     const showTelegramAlert = (message, callback) =>{
@@ -46,10 +46,11 @@ export function useTelegram(){
             backButton.show = isShow
         }
         if(isShow){
-            tg?.BackButton.onClick(onClick)
+            tg?.BackButton.onClick(()=>{
+                onClick()
+                tg?.BackButton.hide()
+            })
             tg?.BackButton.show()
-        }else{
-            tg?.BackButton.hide()
         }
     }
     return {
