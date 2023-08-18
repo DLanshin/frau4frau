@@ -106,6 +106,7 @@ const Form = observer(() => {
             },()=>{
                 setScreen("contacts")
                 initBackButton(true, () => {
+                    showMainButton({is_visible:false})
                     setScreen("products");
                     initBackButton(false)
                 })
@@ -164,7 +165,7 @@ const Form = observer(() => {
                 >
                     + Добавить товар
                 </Button>
-                <button onClick={()=>{setScreen("contacts")}}>Submit</button>
+                {/*<button onClick={()=>{setScreen("contacts")}}>Submit</button>*/}
             </Screen>
             <Screen className={`screen ${screen === "add_product" ? "" : "display-none"}`}>
                 <div className={"form-block"}>
@@ -276,7 +277,7 @@ const Form = observer(() => {
 
                         </div>
                     </div>
-                    <button type={"submit"}>Submit</button>
+                    {/*<button type={"submit"}>Submit</button>*/}
                 </form>
             </Screen>
             <Screen className={`screen ${screen === "contacts" ? "" : "display-none"}`}>
@@ -378,7 +379,7 @@ const Form = observer(() => {
                             />
                         </div>
                     </div>
-                    <button type={"submit"}>Submit</button>
+                    {/*<button type={"submit"}>Submit</button>*/}
                 </form>
             </Screen>
         </div>
