@@ -19,7 +19,7 @@ import Input from "../components/Form/Input";
 import TextArea from "../components/Form/TextArea";
 
 const Form = observer(() => {
-    const {initBackButton, user_id, onClose, showMainButton} = useTelegram();
+    const {initBackButton, user_id, onClose, mainButton} = useTelegram();
     const [isLoading, setIsLoading] = useState(true);
     const {settings} = UserStore;
     const maxNumber = 6;
@@ -119,33 +119,36 @@ const Form = observer(() => {
     useEffect(()=>{
         if(screen === "products" && formData.products.length){
             console.log("show next button")
-            showMainButton({
-                text: `Далее`,
-                is_visible:true
-            }, mbProductsClick)
+            mainButton.setText('Далее');
+            mainButton.show();
+            mainButton.enable();
+            mainButton.onClick(mbProductsClick);
             return ()=>{
-                showMainButton({is_visible: false, mbProductsClick})
+                mainButton.hide();
+                mainButton.offClick(mbProductsClick);
             }
         }else if(screen === "contacts"){
             console.log("add order main button")
-            showMainButton({
-                is_visible:true,
-                text: `Оформить заказ`,
-            },mbContactsClick)
+            mainButton.setText('Оформить заказ');
+            mainButton.show();
+            mainButton.enable();
+            mainButton.onClick(mbContactsClick);
             return ()=>{
-                showMainButton({is_visible: false, mbContactsClick})
+                mainButton.hide();
+                mainButton.offClick(mbContactsClick);
             }
         }else if(screen === "add_product") {
             console.log("add Product main button")
-            showMainButton({
-                is_visible:true,
-                text: `Добавить`,
-            },mbAddProductClick)
+            mainButton.setText('Добавить');
+            mainButton.show();
+            mainButton.enable();
+            mainButton.onClick(mbAddProductClick);
             return ()=>{
-                showMainButton({is_visible: false, mbAddProductClick})
+                mainButton.hide();
+                mainButton.offClick(mbAddProductClick);
             }
         }
-    }, [formData.products.length, screen]);
+    }, [formData.products.length, screen, mbProductsClick, mbContactsClick, mbAddProductClick]);
 
     if (isLoading) {
         return (<Loader/>);

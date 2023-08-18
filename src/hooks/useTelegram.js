@@ -10,22 +10,6 @@ export function useTelegram(){
         tg?.close()
     }
 
-    const showMainButton = (props, onClick) =>{
-        if(process.env.REACT_APP_MODE === "dev"){
-            const {mainButton} = SettingsStore;
-            mainButton.onClick = onClick
-            mainButton.show = props.is_visible
-            mainButton.text = props.text ?? ""
-        }
-        if(props.is_visible && onClick){
-            tg?.MainButton.setParams(props);
-            tg?.MainButton.show();
-            tg.onEvent('mainButtonClicked', onClick)
-        }else{
-            tg.offEvent('mainButtonClicked', onClick)
-            tg?.MainButton.hide();
-        }
-    }
     const showTelegramAlert = (message, callback) =>{
         tg?.showAlert(message, callback)
     }
@@ -58,7 +42,7 @@ export function useTelegram(){
         user:tg.initDataUnsafe?.user,
         user_id:process.env.REACT_APP_MODE === 'dev' ? 321802111 : tg.initDataUnsafe?.user?.id,
         onClose,
-        showMainButton,
+        mainButton:tg.MainButton,
         showTelegramConfirm,
         showTelegramAlert,
         expandApp,
