@@ -17,23 +17,39 @@ const OrderCard = ({object}) => {
                 <div className="order-card__info order-card__info--hint">
                     {object?.address?.zip} {object?.address?.country} {object?.address?.state} {object?.address?.city} {object?.address?.address} {object?.address?.flat}
                 </div>
-                <br/>
-                <div className="order-card__info">
-                    Комментарий к заявке
-                </div>
                 <div className="order-card__info order-card__info--hint">
-                    {object?.comment}
+                    Телефон: {object?.phone}
                 </div>
                 <br/>
+                {
+                    object?.comment ?
+                        <div>
+                            <div className="order-card__info">
+                                Комментарий к заявке
+                            </div>
+                            <div className="order-card__info order-card__info--hint">
+                                {object?.comment}
+                            </div>
+                            <br/>
+                        </div>
+
+                        :
+                        null
+                }
+
+
                 <div className="order-card__info">
                     Товары
                 </div>
                 <div className="order-card__info">
                     <ul>
                         {
-                            object?.products.map(product=>(
+                            object?.products.map(product => (
                                 <li key={product?.id}>
-                                    {product?.sku}  | {product?.size} | {product?.color} | {product?.count+' шт.'} - <span onClick={()=>{openLink(product?.link)}} className={'link'}>Ссылка</span>
+                                    {product?.sku} | {product?.size} | {product?.color} | {product?.count + ' шт.'} - <span
+                                    onClick={() => {
+                                        openLink(product?.link)
+                                    }} className={'link'}>Ссылка</span>
                                 </li>
                             ))
                         }
