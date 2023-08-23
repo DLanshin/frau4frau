@@ -15,6 +15,10 @@ const OrderCard = ({object}) => {
                     Почтовые реквизиты получателя
                 </div>
                 <div className="order-card__info order-card__info--hint">
+                    {object?.recipient_name}
+                </div>
+
+                <div className="order-card__info order-card__info--hint">
                     {object?.address?.zip} {object?.address?.country} {object?.address?.state} {object?.address?.city} {object?.address?.address} {object?.address?.flat}
                 </div>
                 <div className="order-card__info order-card__info--hint">
